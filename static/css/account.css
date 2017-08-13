@@ -1,0 +1,27 @@
+.login{
+    width: 350px;
+    height: 450px;
+    border: 1px solid #2b542c;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 30px 50px 30px;
+}
+.font1{
+    line-height: 50px;
+    font-size: 20px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.active{
+    background-color: #9acfea;
+}
+.num{
+    line-height: 50px;
+    font-size: 15px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.choose{
+    color: #00CCFF;
+}

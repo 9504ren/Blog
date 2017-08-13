@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/account.css"/>
+</head>
+<body>
+<div class="login" style="height: 500px">
+    <div class="font" style="font-size:xx-large;text-align: center">用户注册</div>
+    <form action="/register.html" method="post" id="fm">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" class="form-control" placeholder="请输入用户名" name="username" id="username"/>
+        </div>
+        <div class="form-group">
+            <label for="password1">密码：</label>
+            <input type="password" class="form-control" placeholder="请输入密码" name="password1" id="password1"/>
+        </div>
+        <div class="form-group">
+            <label for="password2">确认密码：</label>
+            <input type="password" class="form-control" placeholder="请输入密码" name="password2" id="password2"/>
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱：</label>
+            <input type="email" class="form-control" placeholder="请输入邮箱" name="email" id="email"/>
+        </div>
+        <div class="form-group">
+            <label for="check_code">验证码：</label>
+            <input type="text" class="form-control" name="check_code" placeholder="请输入验证码" id="check_code"/>
+            <img src="/check_code" onclick="changecode(this);" id="check_c">
+        </div>
+        <div>
+            <a id="submit" class="btn btn-default">注册</a>
+            <span style="float: right;background-color: #00CCFF" class="error"></span>
+        </div>
+    </form>
+</div>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript"></script>
+<script>
+    function changecode(ths) {
+        ths.src=ths.src+'?';
+    }
+    $(function () {
+        submit_user();
+    });
+    function submit_user() {
+        $('#submit').click(function () {
+            console.log(1)
+            $.ajax({
+                url:'/register.html',
+                type:'POST',
+                data:$('#fm').serialize(),
+                dataType:'JSON',
+                success:function (arg) {
+                    if(arg.status){
+                        location.href = '/'
+                    }
+                    else{
+                        var error=$('.error');
+                        error.text(arg.message);
+                        var check=$('#check_c');
+                        check.src=check.src+'?';
+                    }
+                }
+            })
+        })
+    }
+</script>
+</body>
+</html>

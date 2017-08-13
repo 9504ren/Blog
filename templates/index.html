@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>论坛</title>
+    <link rel="stylesheet" href="/static/css/account.css"/>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css"/>
+</head>
+<body>
+{% include 'include/header.html' %}
+<div style="position:relative;
+    top: 100px;
+    width: 1000px;
+    left: 100px">
+    {% for i in data %}
+        <div class="article-item clearfix">
+            <h3><a href="#">{{ i.title }}</a></h3>
+            <div class="clearfix">
+                <a class="avatar" style="float: left;" href="#">
+                    <img src="{{ i.blog.user.avatar }}" style="width: 50px;height: 50px;">
+                </a>
+                {{ i.summary }}
+            </div>
+            <div class="footers">
+                <a href="#">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <span>{{ i.blog.user.nickname }}</span>
+                </a>
+                <span>发布于 {{ i.create_time }}</span>
+                <a href="#" class="ele">
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                    <span>{{ i.comment_count }}</span>
+                </a>
+                <a href="#" class="ele">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    <span>{{ i.up_count }}</span>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="clearfix">
+        <ul class="pagination">
+            {{ page }}
+        </ul>
+    </div>
+</div>
+</body>
+</html>
